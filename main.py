@@ -10,7 +10,7 @@ if __name__ == '__main__':
         CPPBenchmarkProcessor,
     ]
 
-    benchmarks = Benchmarks(processors=processors, runs=30, list_length_max=10000, tries_per_run=10)
+    benchmarks = Benchmarks(processors=processors, runs=30, tries_per_run=3, list_length_max=1000)
     benchmarks.run()
 
     visualizer = BenchmarkVisualizer(benchmarks=benchmarks.results)

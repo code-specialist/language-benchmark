@@ -43,6 +43,9 @@ class BenchmarkVisualizer:
                 plots[language] = benchmark_times[:index + 1]
                 visualize_step()
 
+        for _ in range(int(len(self.frames) * .5)):
+            visualize_step()
+
         print("Data Visualization finished!\n")
 
     def create_gif(self):

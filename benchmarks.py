@@ -9,7 +9,7 @@ from processors.abstract import BenchmarkProcessor
 
 class Benchmarks:
 
-    def __init__(self, processors: List[Type[BenchmarkProcessor]], runs: int, list_length_min: int = 100, list_length_max: int = 100000, tries_per_run: int = 30):
+    def __init__(self, processors: List[Type[BenchmarkProcessor]], runs: int, tries_per_run: int = 30, list_length_min: int = 100, list_length_max: int = 100000):
         self.list_length_min = list_length_min
         self.list_length_max = list_length_max
         self.runs = runs
@@ -25,8 +25,10 @@ class Benchmarks:
 
         print(f"\nStarting Benchmarks - {self.runs} runs")
 
-        for list_length in range(self.list_length_min, self.list_length_max, int(self.list_length_max / self.runs)):
-            print(f"\n\t Run {int(list_length / int(self.list_length_max / self.runs)) + 1}:")
+        run_counter = 0
+        for list_length in range(self.list_length_min, self.list_length_max, int((self.list_length_max - self.list_length_min) / self.runs)):
+            run_counter += 1
+            print(f"\n\t Run {run_counter}")
             for processor in self.processors:
 
                 tries = []
@@ -41,7 +43,7 @@ class Benchmarks:
 
                 self.results[processor].append(average_processing_time)
 
-        print("Benchmarks finished!\n")
+        print("\nBenchmarks finished!\n")
 
     def export(self, filename: str):
         with open(filename, "w") as file:
