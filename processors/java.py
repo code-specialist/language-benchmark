@@ -19,9 +19,9 @@ class JavaBenchmarkProcessor(BenchmarkProcessor):
         ).communicate()
 
     @staticmethod
-    def process(list_input: List[int]):
+    def process(list_length: int):
         subprocess.Popen(
-            ["java", "-cp", "implementations", "BubbleSort", *map(str, list_input)],
+            ["java", "-cp", "implementations", "BubbleSort", "numbers.txt", str(list_length)],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         ).communicate()

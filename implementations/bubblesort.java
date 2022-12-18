@@ -1,4 +1,7 @@
 import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class BubbleSort {
 
@@ -23,10 +26,24 @@ public class BubbleSort {
     }
 
     public static void main(String[] args) {
-        int[] numbers = new int[args.length];
-        for (int i = 0; i < args.length; i++) {
-           numbers[i] = Integer.parseInt(args[i]);
-        }
+        String numbersFilename = args[0];
+        int[] numbers = new int[Integer.parseInt(args[1])];
+
+        BufferedReader reader;
+
+		try {
+			reader = new BufferedReader(new FileReader(numbersFilename));
+			String line = reader.readLine();
+
+            for(int i = 0; i < numbers.length; i++) {
+                numbers[i] = Integer.parseInt(reader.readLine());
+            }
+
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
         sort(numbers);
     }
 }

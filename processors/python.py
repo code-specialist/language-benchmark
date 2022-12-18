@@ -1,4 +1,3 @@
-from typing import List
 import subprocess
 
 from processors.abstract import BenchmarkProcessor
@@ -15,10 +14,9 @@ class PythonBenchmarkProcessor(BenchmarkProcessor):
         pass
 
     @staticmethod
-    def process(list_input: List[int]):
-        process = subprocess.Popen(
-            ['venv/bin/python', 'implementations/python.py', f'"{list_input}"'],
+    def process(list_length: int):
+        subprocess.Popen(
+            ["venv/bin/python", "implementations/bubblesort.py", "numbers.txt", str(list_length)],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-        )
-        process.communicate()
+        ).communicate()

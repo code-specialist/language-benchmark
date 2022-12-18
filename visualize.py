@@ -26,7 +26,7 @@ class BenchmarkVisualizer:
             plt.figure(facecolor="#111827")  # Background Color
 
             plt.xlim(0, total_width)
-            plt.ylim(0, .5)
+            plt.ylim(0, self._get_longest_run() * 1.1)
 
             for lang, points in plots.items():
                 points_to_plot = [*points, *([None for _ in range(total_width - len(points))])]
@@ -59,10 +59,10 @@ class BenchmarkVisualizer:
             loop=0,
         )
 
-        # with imageio.get_writer("animation.gif", mode='I', duration=1 / 30) as writer:
-        #     # Write images where each is display for 1/30s → 30 frames per second
-        #     for frame in self.frames:  # Iterate over the frames
-        #         frame = imread(frame)  # Convert to ndarray
-        #         writer.append_data(frame)  # Write the image to the stream
-
         print("Successfully created GIF!")
+
+    def _get_longest_run(self) -> float:
+        longest_run = 0
+        for benchmarks in self.benchmarks.values():
+            longest_run = max(longest_run, max(benchmarks))
+        return longest_run

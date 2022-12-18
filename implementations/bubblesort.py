@@ -13,6 +13,14 @@ def bubble_sort(unsorted_list: List) -> List:
     return unsorted_list
 
 
-if __name__ == '__main__':
-    list_input = eval(sys.argv[1])
-    bubble_sort(unsorted_list=list_input)
+if __name__ == "__main__":
+    sys.setrecursionlimit(100000)
+
+    numbers_filename, list_length = sys.argv[1], int(sys.argv[2])
+    numbers: List[int] = []
+
+    with open(numbers_filename, "r") as numbers_file:
+        for _ in range(list_length):
+            numbers.append(int(numbers_file.readline().strip()))
+
+    sorted_list = bubble_sort(numbers)
