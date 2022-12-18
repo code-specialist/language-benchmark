@@ -10,18 +10,10 @@ class JavaBenchmarkProcessor(BenchmarkProcessor):
     def language() -> str:
         return "Java"
 
-    @staticmethod
-    def prepare():
-        subprocess.Popen(
-            ["javac", "implementations/BubbleSort.java"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        ).communicate()
+    @classmethod
+    def prepare(cls):
+        cls.execute(["javac", "implementations/BubbleSort.java"])
 
-    @staticmethod
-    def process(list_length: int):
-        subprocess.Popen(
-            ["java", "-cp", "implementations", "BubbleSort", "numbers.txt", str(list_length)],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        ).communicate()
+    @classmethod
+    def process(cls, list_length: int):
+        cls.execute(["java", "-cp", "implementations", "BubbleSort", "numbers.txt", str(list_length)])

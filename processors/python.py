@@ -1,5 +1,3 @@
-import subprocess
-
 from processors.abstract import BenchmarkProcessor
 
 
@@ -9,14 +7,6 @@ class PythonBenchmarkProcessor(BenchmarkProcessor):
     def language() -> str:
         return "Python"
 
-    @staticmethod
-    def prepare():
-        pass
-
-    @staticmethod
-    def process(list_length: int):
-        subprocess.Popen(
-            ["venv/bin/python", "implementations/bubblesort.py", "numbers.txt", str(list_length)],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        ).communicate()
+    @classmethod
+    def process(cls, list_length: int):
+        cls.execute(["venv/bin/python", "implementations/bubblesort.py", "numbers.txt", str(list_length)])
