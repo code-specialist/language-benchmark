@@ -10,6 +10,10 @@ class CPPBenchmarkProcessor(BenchmarkProcessor):
     def language() -> str:
         return "C++"
 
+    @staticmethod
+    def color() -> str:
+        return "#0BB5FF"
+
     @classmethod
     def prepare(cls):
         cls.execute(["g++", "implementations/bubblesort.cpp", "-o", "implementations/bubblesort-cpp"])

@@ -10,6 +10,10 @@ class JavaBenchmarkProcessor(BenchmarkProcessor):
     def language() -> str:
         return "Java"
 
+    @staticmethod
+    def color() -> str:
+        return "#F9690E"
+
     @classmethod
     def prepare(cls):
         cls.execute(["javac", "implementations/BubbleSort.java"])

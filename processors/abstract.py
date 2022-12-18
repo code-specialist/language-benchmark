@@ -10,6 +10,11 @@ class BenchmarkProcessor(ABC):
     def language() -> str:
         pass
 
+    @staticmethod
+    @abstractmethod
+    def color() -> str:
+        pass
+
     @classmethod
     def prepare(cls):
         pass

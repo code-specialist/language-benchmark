@@ -1,38 +1,35 @@
 from io import BytesIO
-from typing import Dict, List
+from typing import Dict, List, Type
 
 import matplotlib.pyplot as plt
 from PIL import Image
 
+from processors.abstract import BenchmarkProcessor
+
 
 class BenchmarkVisualizer:
+    background_color = "#111827"
 
-    def __init__(self, benchmarks: Dict[str, List[float]]):
+    def __init__(self, benchmarks: Dict[Type[BenchmarkProcessor], List[float]]):
         self.benchmarks = benchmarks
         self.frames = []
-        self.language_color_mapping = {
-            "Python": "#FFD343",
-            "Java": "#F9690E",
-            "JavaScript": "#84BA64",
-            "C++": "#0BB5FF",
-        }
 
     def visualize(self):
         print("Starting Data Visualization...")
 
-        plots: Dict[str, List[float]] = {}
+        plots: Dict[Type[BenchmarkProcessor], List[float]] = {}
         total_width = len(tuple(self.benchmarks.values())[0])
 
         def visualize_step():
             bytes_object = BytesIO()
-            plt.figure(facecolor="#111827")  # Background Color
+            plt.figure(facecolor=self.background_color)  # Background Color
 
             plt.xlim(0, total_width)
             plt.ylim(0, self._get_longest_run() * 1.1)
 
-            for lang, points in plots.items():
+            for processor, points in plots.items():
                 points_to_plot = [*points, *([None for _ in range(total_width - len(points))])]
-                plt.plot(range(total_width), points_to_plot, self.language_color_mapping[lang], label=lang)  # Create a bar chart using the current values of input_list
+                plt.plot(range(total_width), points_to_plot, processor.color(), label=processor.language())  # Create a bar chart using the current values of input_list
 
             plt.tight_layout()  # Make it use tight layout to reduce borders and margins
             plt.axis('off')  # Remove axis
