@@ -12,7 +12,9 @@ class BenchmarkVisualizer:
         self.frames = []
         self.language_color_mapping = {
             "Python": "#FFD343",
-            "Java": "#FF0000",
+            "Java": "#F9690E",
+            "JavaScript": "#84BA64",
+            "C++": "#0BB5FF",
         }
 
     def visualize(self):

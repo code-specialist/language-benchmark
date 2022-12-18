@@ -4,7 +4,7 @@ from collections import defaultdict
 from time import perf_counter
 from typing import Dict, List
 
-from processors import PythonBenchmarkProcessor, JavaBenchmarkProcessor, CPPBenchmarkProcessor
+from processors import PythonBenchmarkProcessor, JavaBenchmarkProcessor, CPPBenchmarkProcessor, JavaScriptBenchmarkProcessor
 
 
 class Benchmarks:
@@ -18,6 +18,7 @@ class Benchmarks:
         self.language_processors = [
             PythonBenchmarkProcessor,
             JavaBenchmarkProcessor,
+            JavaScriptBenchmarkProcessor,
             CPPBenchmarkProcessor,
         ]
 
