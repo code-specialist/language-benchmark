@@ -23,6 +23,11 @@ class Benchmarks:
         ]
 
     def run(self):
+        print("\nPreparing Benchmarks...")
+        for processor in self.language_processors:
+            processor.prepare()
+        print("Benchmarks prepared, let's go!")
+
         print(f"\nStarting Benchmarks - {self.iterations} iterations")
 
         sys.setrecursionlimit(10000)

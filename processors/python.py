@@ -11,6 +11,10 @@ class PythonBenchmarkProcessor(BenchmarkProcessor):
         return "Python"
 
     @staticmethod
+    def prepare():
+        pass
+
+    @staticmethod
     def process(list_input: List[int]):
         process = subprocess.Popen(
             ['venv/bin/python', 'implementations/python.py', f'"{list_input}"'],

@@ -11,10 +11,17 @@ class JavaBenchmarkProcessor(BenchmarkProcessor):
         return "Java"
 
     @staticmethod
-    def process(list_input: List[int]):
-        process = subprocess.Popen(
-            ['java', 'implementations/bubblesort', *map(str, list_input)],
+    def prepare():
+        subprocess.Popen(
+            ["javac", "implementations/BubbleSort.java"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-        )
-        process.communicate()
+        ).communicate()
+
+    @staticmethod
+    def process(list_input: List[int]):
+        subprocess.Popen(
+            ["java", "-cp", "implementations", "BubbleSort", *map(str, list_input)],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        ).communicate()

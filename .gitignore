@@ -1,5 +1,15 @@
+# Custom
+results.json
+
+# Mac
+.DS_Store
+
+# IntelliJ
+.idea
+
+# Python
 **/__pycache__/**
 venv
-.DS_Store
-results.json
-.idea
+
+# Java
+*.class
