@@ -47,11 +47,21 @@ class Benchmarks:
             if run_counter > self.configuration.runs:
                 break
 
-            run_counter += 1
+            processor_counter = 0
+
+            def display_progress():
+                self._display_benchmark_progress(
+                    run=run_counter,
+                    current_step=run_counter * len(self.configuration.processors) + processor_counter,
+                    total_steps=self.configuration.runs * len(self.configuration.processors),
+                    current_language=processor.language(),
+                )
 
             for processor in self.configuration.processors:
-                self._display_benchmark_progress(run=run_counter, current_language=processor.language())
                 tries = []
+
+                display_progress()
+
                 for _ in range(self.configuration.iterations_per_run):
                     start = perf_counter()
                     processor.process(list_length=list_length)
@@ -59,7 +69,13 @@ class Benchmarks:
                     tries.append(end - start)
 
                 average_processing_time = statistics.mean(tries)
+                processor_counter += 1
+
                 self._results[processor].append(average_processing_time)
+
+                display_progress()
+
+            run_counter += 1
 
         print("\nBenchmarks finished!\n")
 
@@ -129,8 +145,8 @@ class Benchmarks:
     def results(self) -> dict[Type[BenchmarkProcessor], list[float]]:
         return self._results
 
-    def _display_benchmark_progress(self, run: int, current_language: str, bar_length=50) -> None:
-        progress = run / self.configuration.runs
+    def _display_benchmark_progress(self, run: int, current_step: int, total_steps: int, current_language: str, bar_length=50) -> None:
+        progress = current_step / total_steps
         bar = self._progress_bar_str(progress=progress, width=bar_length)
         language = self._current_language_str(current_language=current_language)
         run_progress = self._benchmark_run_progress_str(run=run)

@@ -8,12 +8,12 @@ class BenchmarkProcessor(ABC):
     @staticmethod
     @abstractmethod
     def language() -> str:
-        pass
+        raise NotImplementedError
 
     @staticmethod
     @abstractmethod
     def color() -> str:
-        pass
+        raise NotImplementedError
 
     @classmethod
     def prepare(cls):
@@ -22,7 +22,7 @@ class BenchmarkProcessor(ABC):
     @classmethod
     @abstractmethod
     def process(cls, list_length: int):
-        pass
+        raise NotImplementedError
 
     @staticmethod
     def execute(command: List[str]):
