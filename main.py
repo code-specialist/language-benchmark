@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
         # benchmarks
         iterations_per_run=10,
-        input_length_max=1000,
+        input_length_max=5000,
 
         # visualization
         dpi=300,

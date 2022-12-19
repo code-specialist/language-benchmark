@@ -48,11 +48,12 @@ class Benchmarks:
                 break
 
             processor_counter = 0
+            run_counter += 1
 
             def display_progress():
                 self._display_benchmark_progress(
                     run=run_counter,
-                    current_step=run_counter * len(self.configuration.processors) + processor_counter,
+                    current_step=(run_counter - 1) * len(self.configuration.processors) + processor_counter,
                     total_steps=self.configuration.runs * len(self.configuration.processors),
                     current_language=processor.language(),
                 )
@@ -74,8 +75,6 @@ class Benchmarks:
                 self._results[processor].append(average_processing_time)
 
                 display_progress()
-
-            run_counter += 1
 
         print("\nBenchmarks finished!\n")
 
