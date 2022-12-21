@@ -1,6 +1,7 @@
 # Custom
 results.json
 implementations/bubblesort-cpp
+implementations/bubblesort-rust
 *.gif
 
 # Mac
