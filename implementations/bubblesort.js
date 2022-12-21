@@ -2,27 +2,25 @@ const fs = require('fs');
 const assert = require('assert');
 
 function bubbleSort(array) {
-    let hasSwapped = false;
-    let outerLoopIterationCount = 0;
+    const n = array.length;
+    let swapNeeded = true;
+    let i = 0;
 
-    for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array.length - i; j++) {
-            if (array[j] > array[j + 1]) {
-                hasSwapped = true;
-                let tmp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = tmp;
+    while (i < n - 1 && swapNeeded) {
+        swapNeeded = false;
+        for (let j = 1; j < n - i; j++) {
+            if (array[j - 1] > array[j]) {
+                const temp = array[j - 1];
+                array[j - 1] = array[j];
+                array[j] = temp;
+                swapNeeded = true;
             }
         }
-
-        if (!hasSwapped) {
-            return outerLoopIterationCount;
+        if(!swapNeeded) {
+            break;
         }
-
-        hasSwapped = false
-        outerLoopIterationCount++;
+        i++;
     }
-    return outerLoopIterationCount;
 }
 
 try {
